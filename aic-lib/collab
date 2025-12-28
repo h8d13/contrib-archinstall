@@ -7,11 +7,19 @@ dev_flags=(--debug --verbose)
 provider="https://github.com"
 #############
 
-# usage collab <user> <repo> [branch]
+# usage collab [-c] <user> <repo> [branch]
+# -c: clean up clone after use
 # examples
 # collab archlinux archinstall master
-# collab h8d13 archinstall-patch dot-algo
+# collab -c h8d13 archinstall-patch dot-resume
 # if not branch is provided we remove the -b altogether from constructor
+
+# parse clean flag
+clean_after=0
+[ "$1" = "-c" ] && clean_after=1 && shift
+
+# determine we have at least arg1 | arg2
+[ $# -lt 2 ] && echo "Usage: collab [-c] <user> <repo> [branch]" >&2 && exit 1
 
 # Determine target directory and branch
 if [ -n "$3" ]; then
@@ -31,3 +39,6 @@ git clone $branch_arg "$provider/$1/$2" "$target_dir"
 
 cd "$target_dir" || exit 1
 sudo python -m archinstall "${dev_flags[@]}"
+
+# cleanup if flag was set
+[ $clean_after -eq 1 ] && cd .. && sudo rm -rf "$target_dir" && echo "Cleaned up $target_dir"

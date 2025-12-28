@@ -1,6 +1,8 @@
 #!/bin/sh
-
-
-
+# wrapper to simply pass all to aic-lib
+# defined as 2 letter commands 676 options
+##commandsm##
+# receive co > collab
+[ "$1" = "co" ] && set -- "collab" "${@:2}"
 
 "./aic-lib/$@"
