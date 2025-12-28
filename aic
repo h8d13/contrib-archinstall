@@ -1,8 +1,18 @@
 #!/bin/sh
 # wrapper to simply pass all to aic-lib
-# defined as 2 letter commands 676 options
-##commandsm##
-# receive co > collab
-[ "$1" = "co" ] && set -- "collab" "${@:2}"
+# defined as 2 letter commands 676 options (+ flags)
+# show help if no args
+[ $# -eq 0 ] && cat << EOF && exit 0
+archinstall-contrib
 
+Commands:
+  co  - collab    Collaborate on forks/branches
+  gw  - gitwrap   Git branch operations
+
+Usage: aic <command> [args]
+EOF
+
+##commandsm##
+[ "$1" = "co" ] && set -- "collab" "${@:2}"
+[ "$1" = "gw" ] && set -- "gitwrap" "${@:2}"
 "./aic-lib/$@"

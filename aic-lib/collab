@@ -14,7 +14,7 @@ provider="https://github.com"
 # collab -c h8d13 archinstall-patch dot-resume
 # if not branch is provided we remove the -b altogether from constructor
 
-# parse clean flag
+# parse clean flag like a trap
 clean_after=0
 [ "$1" = "-c" ] && clean_after=1 && shift
 
@@ -23,20 +23,23 @@ clean_after=0
 
 # Determine target directory and branch
 if [ -n "$3" ]; then
+    #has branch clone it with target name
     target_dir="$3"
     branch_arg="-b $3"
 else
+    # no branch clone it as repo name
     target_dir="$2"
     branch_arg=""
 fi
 
-# ensure we clone fresh delete if present
+# ensure we clone fresh delete if present delete with priv
 if [ -d "$target_dir" ]; then
     sudo rm -rf "$target_dir"; echo "Cleaned $target_dir"
 fi
 
 git clone $branch_arg "$provider/$1/$2" "$target_dir"
 
+# run main module with dev flags
 cd "$target_dir" || exit 1
 sudo python -m archinstall "${dev_flags[@]}"
 

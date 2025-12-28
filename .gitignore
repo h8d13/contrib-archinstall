@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 archinstall*
+src/
+pkg/
+*.pkg.tar.zst

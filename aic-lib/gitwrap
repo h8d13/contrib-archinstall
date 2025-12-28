@@ -1,0 +1,15 @@
+#!/bin/sh
+# git branch wrapper
+. "$(dirname "$0")/aic.conf"  
+
+case "$1" in
+    l) git branch -l ;;             # LIST
+    n) git checkout -b "$2" ;;      # NEW <name>
+    a) git add "$2";;               # ADD <file>
+    c) git commit ;;                # HAPPY
+    s) git stash ;;                 # SAD
+    b) git checkout master ;;       # BACK
+    d) git branch -d "$2" ;;        # DELETE
+    # catchall
+    *) echo "Unknown options" >&2; exit 1 ;;
+esac
