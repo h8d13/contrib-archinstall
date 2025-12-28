@@ -1,4 +1,8 @@
 #!/bin/sh
 # usage collab <user> <branch> <fork-name>
+# examples
+# collab archlinux master archinstall
+# collab h8d13 dot-algo archinstall-patch
+
 provider="https://github.com"
 git clone -b "$2" "$provider/$1/$3"

@@ -1,0 +1,3 @@
+#!/bin/sh
+dev_flags="--debug --verbose"
+python -m archinstall "$dev_flags"
