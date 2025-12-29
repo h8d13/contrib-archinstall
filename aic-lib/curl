@@ -1,0 +1,5 @@
+#!/bin/sh
+# hardcodes name "testing" for branch
+
+curl -fsSL https://github.com/$1/$2/raw/testing/runme | bash
+
