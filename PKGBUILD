@@ -19,5 +19,6 @@ package() {
 
     # Install all library scripts
     install -dm755 "$pkgdir/usr/lib/ac"
-    install -Dm755 aic-lib/* "$pkgdir/usr/lib/ac/"
+    cp -r aic-lib/* "$pkgdir/usr/lib/ac/"
+    chmod -R 755 "$pkgdir/usr/lib/ac"
 }
