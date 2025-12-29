@@ -14,6 +14,6 @@ package() {
     install -Dm755 ac "$pkgdir/usr/bin/ac"
 
     # Install all library scripts
-    install -dm755 "$pkgdir/usr/lib/ac"
+    install -dm755 "$pkgdir/usr/lib/aic"
     install -Dm755 aic-lib/* "$pkgdir/usr/lib/aic/"
 }
