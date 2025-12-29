@@ -23,7 +23,7 @@ py_flags=""
 [[ "$1" =~ ^-[cB]+$ ]] && shift
 
 # determine we have at least arg1 | arg2
-[ $# -lt 2 ] && echo "Usage: collab [-c] <user> <repo> [branch]" >&2 && exit 1
+[ $# -lt 2 ] && echo "Usage: collab [-cB] <user> <repo> [branch]" >&2 && exit 1
 
 # Determine target directory and branch
 if [ -n "$3" ]; then
