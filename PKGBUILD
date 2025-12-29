@@ -11,7 +11,7 @@ package() {
     cd "$startdir"
 
     # Install main wrapper
-    install -Dm755 aic "$pkgdir/usr/bin/aic"
+    install -Dm755 aic "$pkgdir/usr/bin/ac"
 
     # Install all library scripts
     install -dm755 "$pkgdir/usr/lib/aic"
