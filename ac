@@ -6,7 +6,7 @@
 archinstall-contrib
 
 Commands:
-  co [-c] <user> <repo> <branch>    - collab    Collaborate on forks/branches
+  co [-c] <user> <repo> [branch]    - collab    Collaborate on forks/branches
   rs                                - rescue    Inject rescue mod into archinstall
   gw                                - gitwrap   Git branch operations
 
