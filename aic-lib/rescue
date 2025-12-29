@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+"""
+Rescue mode injector for archinstall.
+Injects rescue.py into archinstall.scripts and executes it.
+"""
+import sys
+import os
+from pathlib import Path
+import importlib.util
+
+def inject_and_run():
+    # Check if running as root, if not re-exec with sudo
+    if os.geteuid() != 0:
+        print("Rescue mode requires root privileges. Re-executing with sudo...")
+        os.execvp('sudo', ['sudo', '--preserve-env=PYTHONPATH', sys.executable] + sys.argv)
+        return
+    # Find directory containing 'archinstall' folder in cwd
+    cwd = Path.cwd()
+    for item in cwd.iterdir():
+        if item.is_dir() and (item / 'archinstall').exists():
+            sys.path.insert(0, str(item))
+            break
+
+    # Get the directory where this script is located
+    script_dir = Path(__file__).parent.resolve()
+    rescue_py = script_dir / 'mods' / 'rescue.py'
+
+    if not rescue_py.exists():
+        print(f"Error: {rescue_py} not found", file=sys.stderr)
+        sys.exit(1)
+
+    # Load rescue.py as a module
+    spec = importlib.util.spec_from_file_location("archinstall.scripts.rescue", rescue_py)
+    if spec is None or spec.loader is None:
+        print(f"Error: Could not load {rescue_py}", file=sys.stderr)
+        sys.exit(1)
+
+    rescue_module = importlib.util.module_from_spec(spec)
+
+    # Inject into archinstall namespace (if needed for imports)
+    sys.modules['archinstall.scripts.rescue'] = rescue_module
+
+    # Execute the module (which runs rescue() automatically)
+    spec.loader.exec_module(rescue_module)
+
+if __name__ == '__main__':
+    inject_and_run()

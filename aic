@@ -8,6 +8,7 @@ archinstall-contrib
 Commands:
   co  - collab    Collaborate on forks/branches
   gw  - gitwrap   Git branch operations
+  rs  - rescue    Mount and chroot into existing installation
 
 Usage: aic <command> [args]
 EOF
@@ -15,4 +16,5 @@ EOF
 ##commandsm##
 [ "$1" = "co" ] && set -- "collab" "${@:2}"
 [ "$1" = "gw" ] && set -- "gitwrap" "${@:2}"
+[ "$1" = "rs" ] && set -- "rescue" "${@:2}"
 "./aic-lib/$@"
