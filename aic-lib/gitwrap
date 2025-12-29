@@ -8,7 +8,7 @@ case "$1" in
     a) git add "$2";;               # ADD <file>
     c) git commit ;;                # HAPPY
     s) git stash ;;                 # SAD
-    b) git checkout master ;;       # BACK
+    b) git checkout $2 ;;           # BACK <branch>
     d) git branch -d "$2" ;;        # DELETE
     # catchall
     *) echo "Unknown options" >&2; exit 1 ;;
