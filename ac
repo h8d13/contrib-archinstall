@@ -21,4 +21,4 @@ EOF
 [ "$1" = "rs" ] && set -- "rescue" "${@:2}"
 [ "$1" = "cu" ] && set -- "curl" "${@:2}"
 
-"./aic-lib/$@"
+"/usr/lib/ac/$@"
