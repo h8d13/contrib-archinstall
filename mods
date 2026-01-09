@@ -12,9 +12,10 @@ Usage: mods <something>
 EOF
 
 ##commandsm##
-[ "$1" = "rs" ] && set -- "rescue" "${@:2}"
+arg1="$1"
+[ "$arg1" = "rs" ] && arg1="rescue"
+shift
 
-
-cmd="/usr/lib/ac/$1"
-[ ! -f "$cmd" ] && echo "Error: Unknown command '$1'" && exit 1
-"$cmd" "${@:2}"
+cmd="/usr/lib/ac/$arg1"
+[ ! -f "$cmd" ] && echo "Error: Unknown command '$arg1'" && exit 1
+"$cmd" "$@"
